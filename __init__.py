@@ -1,0 +1,2 @@
+from test_add_group import TestAddGroup
+from test_add_contact import TestAddContact

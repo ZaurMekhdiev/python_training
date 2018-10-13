@@ -7,6 +7,7 @@ from selenium.common.exceptions import NoSuchElementException
 from group import Group
 
 class TestAddGroup(unittest.TestCase):
+
     def setUp(self):
         self.wd = webdriver.Chrome()
         self.wd.implicitly_wait(30)
@@ -54,7 +55,6 @@ class TestAddGroup(unittest.TestCase):
 
     def open_home_page(self):
         wd = self.wd
-        # open home page
         wd.get("http://localhost/addressbook/group.php")
         return wd
 
@@ -67,7 +67,7 @@ class TestAddGroup(unittest.TestCase):
 
     def is_alert_present(self):
         try:
-            self.wd.switch_to_alert
+            self.switch_to_alert
         except NoAlertPresentException as e:
             return False
         return True

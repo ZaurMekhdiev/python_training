@@ -14,18 +14,19 @@ class TestAddContact(unittest.TestCase):
         self.wd.implicitly_wait(30)
 
     def test_add_contact(self):
-        wd = self.open_home_page()
+        wd = self.wd
         self.login(wd, username="admin", password="secret")
         self.create_contact(wd, firstname="test1", middlename="test2", lastname="test3", address="test4", email="test5")
-        self.return_to_home_page(wd)
         self.logout(wd)
 
     def test_add_empty_contact(self):
         wd = self.open_home_page()
         self.login(wd, username="admin", password="secret")
         self.create_contact(wd, firstname="", middlename="", lastname="", address="", email="")
-        self.return_to_home_page(wd)
         self.logout(wd)
+
+
+# ==================================================================================================
 
     def return_to_home_page(self, wd):
         wd.find_element_by_link_text("home page").click()
@@ -38,6 +39,7 @@ class TestAddContact(unittest.TestCase):
         wd.find_element_by_name("address").send_keys(address)
         wd.find_element_by_name("email").send_keys(email)
         wd.find_element_by_xpath("//input[21]").click()
+        self.return_to_home_page(wd)
 
     def is_element_present(self, how, what):
         try:
@@ -47,6 +49,7 @@ class TestAddContact(unittest.TestCase):
         return True
 
     def login(self, wd, username, password):
+        self.open_home_page()
         wd.find_element_by_name("user").click()
         wd.find_element_by_name("user").clear()
         wd.find_element_by_name("user").send_keys(username)

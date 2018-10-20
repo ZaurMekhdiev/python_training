@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 import pytest
-from application_contacts import Application
-from contact import Contact
-
+from fixture.application_group import Application
+from model.group import Group
 
 
 
@@ -15,18 +14,12 @@ def app(request):
 
 
 #=======================================================================================================================
-def test_add_contact(app):
+def test_add_group(app):
     app.login(username="admin", password="secret")
-    app.create_contact(firstname="test1", middlename="test2", lastname="test3", address="test4", email="test5")
+    app.create_group(Group(name="test", header="test", footer="test"))
     app.logout()
 
-def test_add_empty_contact(app):
+def test_add_empty_group(app):
     app.login(username="admin", password="secret")
-    app.create_contact(firstname="", middlename="", lastname="", address="", email="")
+    app.create_group(Group(name="", header="", footer=""))
     app.logout()
-
-
-
-
-
-

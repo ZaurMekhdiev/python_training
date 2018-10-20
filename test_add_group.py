@@ -14,7 +14,6 @@ def app(request):
 
 
 #=======================================================================================================================
-
 def test_add_group(app):
     app.login(username="admin", password="secret")
     app.create_group(Group(name="test", header="test", footer="test"))

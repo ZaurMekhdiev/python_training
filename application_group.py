@@ -1,9 +1,6 @@
-import unittest
-
+import pytest
 from selenium import webdriver
-from selenium.common.exceptions import NoAlertPresentException
 from selenium.common.exceptions import NoSuchElementException
-
 
 
 class Application:
@@ -24,7 +21,7 @@ class Application:
 
     def create_group(self, group):
         wd = self.wd
-        self.open_group_page(wd)
+        self.open_group_page()
         wd.find_element_by_name("new").click()
         wd.find_element_by_name("group_name").click()
         wd.find_element_by_name("group_name").clear()
@@ -36,7 +33,7 @@ class Application:
         wd.find_element_by_name("group_footer").clear()
         wd.find_element_by_name("group_footer").send_keys(group.footer)
         wd.find_element_by_name("submit").click()
-        self.return_to_group_page(wd)
+        self.return_to_group_page()
 
     def open_group_page(self):
         wd = self.wd
@@ -64,15 +61,5 @@ class Application:
             return False
         return True
 
-    def is_alert_present(self):
-        try:
-            self.switch_to_alert
-        except NoAlertPresentException as e:
-            return False
-        return True
-
     def destroy(self):
         self.wd.quit()
-
-if __name__ == "__main__":
-    unittest.main()

@@ -71,14 +71,14 @@ class TestAddContact(unittest.TestCase):
 
     def is_alert_present(self):
         try:
-            self.driver.switch_to_alert()
+            self.wd.switch_to_alert()
         except NoAlertPresentException as e:
             return False
         return True
 
     def close_alert_and_get_its_text(self):
         try:
-            alert = self.driver.switch_to_alert()
+            alert = self.wd.switch_to_alert()
             alert_text = alert.text
             if self.accept_next_alert:
                 alert.accept()

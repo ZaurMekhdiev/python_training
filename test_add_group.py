@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import pytest
-from application import Application
+from application_group import Application
 from group import Group
 
 
@@ -9,7 +9,7 @@ from group import Group
 @pytest.fixture()
 def app(request):
     fixture = Application()
-    request.addfinalazer(fixture.destroy)
+    request.addfinalizer(fixture.destroy)
     return fixture
 
 

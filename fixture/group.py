@@ -1,11 +1,7 @@
-from selenium.common.exceptions import NoSuchElementException
-
-
 class GroupHelper:
 
     def __init__(self, app):
         self.app = app
-
 
     def return_to_group_page(self):
         wd = self.app.wd
@@ -31,11 +27,11 @@ class GroupHelper:
         wd = self.app.wd
         wd.find_element_by_link_text("groups").click()
 
-
-    def is_element_present(self, how, what):
-        try:
-            self.app.wd.find_element(by=how, value=what)
-        except NoSuchElementException as e:
-            return False
-        return True
-
+    def delete_first_group(self):
+        wd = self.app.wd
+        self.open_group_page()
+        # выбрать первую группу
+        wd.find_element_by_name("selected[]").click()
+        # удалить группу
+        wd.find_element_by_name("delete").click()
+        self.return_to_group_page()

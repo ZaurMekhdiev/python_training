@@ -28,6 +28,13 @@ class ContactHelper:
             return False
         return True
 
+    def delete_first_contact(self):
+        wd = self.app.wd
+        # выбрать первый контакт
+        wd.find_element_by_name("selected[]").click()
+        # удалить группу
+        wd.find_element_by_xpath("//input[@value='Delete']").click()
+        wd.switch_to_alert().accept()
 
     def close_alert_and_get_its_text(self):
         try:
@@ -40,4 +47,3 @@ class ContactHelper:
             return alert_text
         finally:
             self.accept_next_alert = True
-

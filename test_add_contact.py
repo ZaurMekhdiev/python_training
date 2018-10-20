@@ -15,23 +15,25 @@ class TestAddContact(unittest.TestCase):
 
     def test_add_contact(self):
         wd = self.wd
-        self.login(wd, username="admin", password="secret")
-        self.create_contact(wd, firstname="test1", middlename="test2", lastname="test3", address="test4", email="test5")
-        self.logout(wd)
+        self.login(username="admin", password="secret")
+        self.create_contact(firstname="test1", middlename="test2", lastname="test3", address="test4", email="test5")
+        self.logout()
 
     def test_add_empty_contact(self):
         wd = self.open_home_page()
-        self.login(wd, username="admin", password="secret")
-        self.create_contact(wd, firstname="", middlename="", lastname="", address="", email="")
-        self.logout(wd)
+        self.login(username="admin", password="secret")
+        self.create_contact(firstname="", middlename="", lastname="", address="", email="")
+        self.logout()
 
 
 # ==================================================================================================
 
-    def return_to_home_page(self, wd):
+    def return_to_home_page(self):
+        wd = self.wd
         wd.find_element_by_link_text("home page").click()
 
-    def create_contact(self, wd, firstname, middlename, lastname, address, email):
+    def create_contact(self, firstname, middlename, lastname, address, email):
+        wd = self.wd
         wd.find_element_by_link_text("add new").click()
         wd.find_element_by_name("firstname").send_keys(firstname)
         wd.find_element_by_name("middlename").send_keys(middlename)
@@ -43,12 +45,13 @@ class TestAddContact(unittest.TestCase):
 
     def is_element_present(self, how, what):
         try:
-            self.driver.find_element(by=how, value=what)
+            self.wd.find_element(by=how, value=what)
         except NoSuchElementException as e:
             return False
         return True
 
-    def login(self, wd, username, password):
+    def login(self,username, password):
+        wd = self.wd
         self.open_home_page()
         wd.find_element_by_name("user").click()
         wd.find_element_by_name("user").clear()
@@ -57,7 +60,8 @@ class TestAddContact(unittest.TestCase):
         wd.find_element_by_name("pass").send_keys(password)
         wd.find_element_by_id("LoginForm").submit()
 
-    def logout(self, wd):
+    def logout(self):
+        wd = self.wd
         wd.find_element_by_link_text("Logout").click()
 
     def open_home_page(self):

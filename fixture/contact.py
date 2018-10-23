@@ -6,6 +6,7 @@ class ContactHelper:
     def __init__(self, app):
         self.app = app
 
+
     def return_to_home_page(self):
         wd = self.app.wd
         wd.find_element_by_link_text("home page").click()
@@ -36,6 +37,17 @@ class ContactHelper:
         wd.find_element_by_xpath("//input[@value='Delete']").click()
         wd.switch_to_alert().accept()
 
+    def modify(self, contact):
+        wd = self.app.wd
+        wd.find_element_by_link_text("add new").click()
+        wd.find_element_by_name("firstname").send_keys(contact.firstname)
+        wd.find_element_by_name("middlename").send_keys(contact.middlename)
+        wd.find_element_by_name("lastname").send_keys(contact.lastname)
+        wd.find_element_by_name("address").send_keys(contact.address)
+        wd.find_element_by_name("email").send_keys(contact.email)
+        wd.find_element_by_xpath("//input[21]").click()
+        self.return_to_home_page()
+
     def close_alert_and_get_its_text(self):
         try:
             alert = self.app.wd.switch_to_alert()
@@ -47,3 +59,4 @@ class ContactHelper:
             return alert_text
         finally:
             self.accept_next_alert = True
+
